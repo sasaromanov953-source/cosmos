@@ -502,6 +502,7 @@ var hpCaption = document.getElementById('hpCaption');
 var hpCoords = document.getElementById('hpCoords');
 var hpCredit = document.getElementById('hpCredit');
 document.getElementById('hpBack').addEventListener('click', function(){ closeHotspot(false); });
+document.querySelector('.hp-media').addEventListener('click', function(){ closeHotspot(false); });
 
 var DEFAULT_FOV = 34;
 function zoomCamera(toClose, dirVec, cb){
