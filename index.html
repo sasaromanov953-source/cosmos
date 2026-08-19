@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbitarium — интерактивный атлас Солнечной системы</title>
+<meta name="description" content="Вращайте планеты мышью и приближайте любую точку поверхности — от марсианских вулканов до Эвереста на Земле.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top"><span class="brand-dot"></span>ORBITARIUM</a>
+    <ul class="nav-links">
+      <li><a href="#sun">Солнце</a></li>
+      <li><a href="#stage">Планеты</a></li>
+      <li><a href="#moons">Спутники</a></li>
+      <li><a href="#compare">Сравнение</a></li>
+      <li><a href="#beyond">За Нептуном</a></li>
+      <li><a href="#about">О проекте</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#stage" style="padding:10px 20px;font-size:0.8125rem;">Исследовать</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="num">00</span> Интерактивный атлас</span>
+      <h1>Потрогайте <span class="accent-word">Солнечную систему.</span></h1>
+      <p class="lede">Восемь планет в объёме: вращайте их мышью и нажимайте на любую точку поверхности — от марсианских вулканов до конкретных мест на Земле, — чтобы приблизиться и увидеть, что там на самом деле.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#stage">Исследовать планеты</a>
+        <a class="btn btn-ghost" href="#about">Как это устроено</a>
+      </div>
+      <div class="hero-hint"><span class="kbd">drag</span> вращать <span class="kbd">click</span> приблизить</div>
+    </div>
+    <div class="hero-photo">
+      <img id="heroPhoto" alt="Эверест с орбиты">
+      <span class="cap">Эверест · 27.99° с.ш., 86.92° в.д.</span>
+      <span class="tag2">🌍</span>
+    </div>
+  </div>
+</header>
+
+<section class="sun-section" id="sun">
+  <div class="wrap sun-grid">
+    <div class="sun-copy reveal">
+      <span class="eyebrow"><span class="num">01</span> Звезда системы</span>
+      <h2 id="sunName"></h2>
+      <p class="sun-epithet" id="sunEpithet"></p>
+      <div id="sunParagraphs"></div>
+      <div class="sun-stat-grid" id="sunStats"></div>
+    </div>
+    <div class="sun-images reveal reveal-1" id="sunImages"></div>
+  </div>
+</section>
+
+<section class="stage-section" id="stage">
+  <div class="wrap">
+    <div class="stage-head">
+      <div>
+        <span class="eyebrow reveal"><span class="num">02</span> Сцена</span>
+        <h2 class="reveal" style="font-size:1.5rem;margin-top:10px;">Выберите планету</h2>
+      </div>
+      <div class="planet-tabs" id="planetTabs"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stage-viewport" id="stageViewport">
+      <canvas id="glcanvas"></canvas>
+      <div class="ghost ghost-prev" id="ghostPrev"></div>
+      <div class="ghost ghost-next" id="ghostNext"></div>
+      <button class="stage-arrow left" id="prevBtn" aria-label="Предыдущая планета">‹</button>
+      <button class="stage-arrow right" id="nextBtn" aria-label="Следующая планета">›</button>
+      <div class="drag-hint" id="dragHint">вращайте · нажмите на поверхность, чтобы приблизиться</div>
+      <div class="stage-loading" id="stageLoading"><div class="load-ring"></div>Загрузка снимков</div>
+
+      <div class="hotspot-panel" id="hotspotPanel">
+        <button class="hp-back" id="hpBack">← Назад к планете</button>
+        <div class="hp-inner">
+          <div class="hp-media"><img id="hpImage" alt=""></div>
+          <div class="hp-body">
+            <span class="hp-coords" id="hpCoords"></span>
+            <h3 id="hpTitle"></h3>
+            <p id="hpCaption"></p>
+            <span class="hp-credit" id="hpCredit"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap stage-info">
+    <div class="planet-copy" id="planetCopy"></div>
+  </div>
+</section>
+
+<section class="moons-section" id="moons">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="num">03</span> Спутники</span>
+    <h2 class="reveal" style="font-size:1.7rem;margin:12px 0 6px;">Шесть миров на орбите чужих планет</h2>
+    <p class="lede reveal">У планет системы — суммарно больше 300 известных спутников. Вот шесть самых необычных.</p>
+    <div class="moons-grid" id="moonsGrid"></div>
+  </div>
+</section>
+
+<section class="compare" id="compare">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="num">04</span> Сравнение</span>
+    <h2 class="reveal" style="font-size:1.7rem;margin:12px 0 6px;">Восемь размеров в одном ряду</h2>
+    <p class="lede reveal">Диаметры планет по системе Земля = 100.</p>
+    <div class="compare-bars reveal">
+      <div class="cbar-row"><span class="cbar-name">Юпитер</span><div class="cbar-track"><div class="cbar-fill" style="--w:100%;"></div></div><span class="cbar-val">1097</span></div>
+      <div class="cbar-row"><span class="cbar-name">Сатурн</span><div class="cbar-track"><div class="cbar-fill" style="--w:83.5%;"></div></div><span class="cbar-val">914</span></div>
+      <div class="cbar-row"><span class="cbar-name">Уран</span><div class="cbar-track"><div class="cbar-fill" style="--w:36.4%;"></div></div><span class="cbar-val">398</span></div>
+      <div class="cbar-row"><span class="cbar-name">Нептун</span><div class="cbar-track"><div class="cbar-fill" style="--w:35.3%;"></div></div><span class="cbar-val">387</span></div>
+      <div class="cbar-row"><span class="cbar-name">Земля</span><div class="cbar-track"><div class="cbar-fill" style="--w:9.1%;"></div></div><span class="cbar-val">100</span></div>
+      <div class="cbar-row"><span class="cbar-name">Венера</span><div class="cbar-track"><div class="cbar-fill" style="--w:8.6%;"></div></div><span class="cbar-val">95</span></div>
+      <div class="cbar-row"><span class="cbar-name">Марс</span><div class="cbar-track"><div class="cbar-fill" style="--w:4.8%;"></div></div><span class="cbar-val">53</span></div>
+      <div class="cbar-row"><span class="cbar-name">Меркурий</span><div class="cbar-track"><div class="cbar-fill" style="--w:3.5%;"></div></div><span class="cbar-val">38</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="beyond" id="beyond">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="num">05</span> За Нептуном</span>
+    <h2 class="reveal" style="font-size:1.7rem;margin:12px 0 28px;">Там, где заканчиваются планеты</h2>
+    <div class="beyond-grid">
+      <div class="beyond-card reveal" id="plutoCard">
+        <div class="thumb"><img id="plutoImg" alt="Плутон" loading="lazy"></div>
+        <h3>Плутон и пояс Койпера</h3>
+        <p>За орбитой Нептуна лежит пояс Койпера — россыпь ледяных тел, включая карликовую планету Плутон. В 2006 году Международный астрономический союз уточнил определение планеты, и Плутон, не «расчистивший» орбиту от соседей, стал карликовой планетой.</p>
+      </div>
+      <div class="beyond-card reveal reveal-1" id="kuiperCard">
+        <div class="thumb"><img id="kuiperImg" alt="Пояс Койпера" loading="lazy"></div>
+        <h3>Гелиопауза и облако Оорта</h3>
+        <p>Около 120 а.е. от Солнца солнечный ветер сталкивается с межзвёздной средой — этот рубеж в 2012 году пересёк «Вояджер-1». Ещё дальше простирается облако Оорта — оболочка изо льда, растянутая почти на световой год.</p>
+      </div>
+    </div>
+    <div class="beyond-scale reveal reveal-2">
+      <span style="left:0%;">Нептун · 30 а.е.</span>
+      <span style="left:38%;">Гелиопауза · 120 а.е.</span>
+      <span style="left:94%;">Облако Оорта · ~100 000 а.е.</span>
+    </div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="wrap foot-row">
+    <span class="foot-brand">ORBITARIUM</span>
+    <p class="foot-note">Текстуры всех восьми планет — реальные данные космических аппаратов NASA/JPL (Mariner 10, MESSENGER, Magellan, Viking, Cassini, Juno, Voyager 2), текстурный пакет Solar System Scope (CC BY 4.0). Часть точек приближения (Эверест, Антарктида, гора Олимп, долины Маринер, ровер Curiosity, Большое Красное Пятно) — подлинные фотографии NASA/JPL. Снимки спутников, Солнца, Плутона, пояса Койпера и часть точек приближения — AI-реконструкции по мотивам реальных данных миссий (Nano Banana / Flux-2, KIE), а не отдельные фотографии; это указано в подписи при просмотре. Координаты точек приблизительны и служат для ориентации, а не точной навигации. Схемы масштаба на странице не соблюдают реальные пропорции расстояний.</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</button>
+  <div class="lightbox-inner">
+    <img id="lightboxImg" alt="">
+    <div class="lightbox-body">
+      <span class="eyebrow" id="lightboxEyebrow"></span>
+      <h3 id="lightboxTitle"></h3>
+      <p class="ep" id="lightboxEp"></p>
+      <p id="lightboxText"></p>
+    </div>
+  </div>
+</div>
+
+
+<script src="assets/js/vendor/three.min.js"></script>
+<script src="assets/js/vendor/gsap.min.js"></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/vendor/lenis.min.js"></script>
+<script src="assets/js/app-data.js"></script>
+<script src="assets/js/app-engine.js"></script>
+<script src="assets/js/motion.js"></script>
+</body>
+</html>
