@@ -126,11 +126,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 @media (max-width:860px){.nav-links{display:none;}}
 
 /* -------- hero -------- */
-.hero{padding:56px 0 84px;}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
-@media (max-width:920px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
+.hero{padding:56px 0 84px;min-height:92vh;display:flex;align-items:center;overflow:clip;}
+.hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;width:100%;}
+@media (max-width:920px){.hero{min-height:0;}.hero-grid{grid-template-columns:1fr;gap:36px;}}
 .hero-copy{max-width:560px;}
-.hero h1{font-size:clamp(2.5rem,5vw,3.9rem);line-height:1.06;margin:18px 0 20px;}
+.hero h1{font-size:clamp(3rem,6.4vw,5.4rem);line-height:1.02;margin:18px 0 20px;}
+.hero h1 .word{display:inline-block;overflow:hidden;vertical-align:top;}
+.hero h1 .word > span{display:inline-block;will-change:transform;}
 .hero h1 .accent-word{color:var(--accent);font-style:italic;}
 .hero .lede{font-size:1.1rem;margin-bottom:8px;}
 .hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
@@ -145,8 +147,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:0.95;
   box-shadow:var(--shadow-lg);
 }
-.hero-photo img{width:100%;height:100%;object-fit:cover;animation:kenburns 22s ease-in-out infinite alternate;will-change:transform;}
-@keyframes kenburns{from{transform:scale(1) translate3d(0,0,0);}to{transform:scale(1.09) translate3d(-1%,-1%,0);}}
+.hero-photo img{width:100%;height:100%;object-fit:cover;animation:kenburns 16s ease-in-out infinite alternate;will-change:transform;transform-origin:56% 46%;}
+@keyframes kenburns{from{transform:scale(1) translate3d(0,0,0);}to{transform:scale(1.22) translate3d(-2.5%,-2.5%,0);}}
 .hero-photo::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(120% 90% at 50% 100%, rgba(10,8,16,.32), transparent 60%);
