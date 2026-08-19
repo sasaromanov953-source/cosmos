@@ -332,7 +332,7 @@ function renderCopy(planet){
     '<div class="hotspot-chips">'+chipHtml+'</div></div>';
   el.querySelectorAll('.hchip').forEach(function(btn){
     btn.addEventListener('click', function(){
-      if(transitioning || zoomed) return;
+      if(transitioning) return;
       var h = planet.hotspots[parseInt(btn.dataset.hi,10)];
       if(h.isRing){ openHotspot(planet, h, null); }
       else { openHotspot(planet, h, {lat:h.lat, lon:h.lon}); }
