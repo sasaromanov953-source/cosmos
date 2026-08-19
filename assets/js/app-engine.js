@@ -2,6 +2,22 @@
 'use strict';
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ============ mobile nav menu ============ */
+(function(){
+  var burger = document.getElementById('navBurger');
+  var links = document.querySelector('.nav-links');
+  if(!burger || !links) return;
+  function setOpen(open){
+    links.classList.toggle('open', open);
+    burger.classList.toggle('active', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  burger.addEventListener('click', function(){ setOpen(!links.classList.contains('open')); });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ setOpen(false); });
+  });
+})();
+
 /* ============ hero photo ============ */
 (function(){
   var img = document.getElementById('heroPhoto');

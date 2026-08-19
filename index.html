@@ -6,8 +6,8 @@
 <title>Orbitarium — интерактивный атлас Солнечной системы</title>
 <meta name="description" content="Вращайте планеты мышью и приближайте любую точку поверхности — от марсианских вулканов до Эвереста на Земле.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>">
-<link rel="stylesheet" href="assets/css/fonts.css?v=4">
-<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="stylesheet" href="assets/css/fonts.css?v=3">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 
@@ -23,6 +23,7 @@
       <li><a href="#about">О проекте</a></li>
     </ul>
     <a class="btn btn-primary" href="#stage" style="padding:10px 20px;font-size:0.8125rem;">Исследовать</a>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -36,7 +37,10 @@
         <a class="btn btn-primary" href="#stage">Исследовать планеты</a>
         <a class="btn btn-ghost" href="#about">Как это устроено</a>
       </div>
-      <div class="hero-hint"><span class="kbd">drag</span> вращать <span class="kbd">click</span> приблизить</div>
+      <div class="hero-hint">
+        <span class="hint-mouse"><span class="kbd">drag</span> вращать <span class="kbd">click</span> приблизить</span>
+        <span class="hint-touch"><span class="kbd">swipe</span> вращать <span class="kbd">tap</span> приблизить</span>
+      </div>
     </div>
     <div class="hero-photo">
       <img id="heroPhoto" alt="Эверест с орбиты">
@@ -172,12 +176,12 @@
 </div>
 
 
-<script src="assets/js/vendor/three.min.js?v=4"></script>
-<script src="assets/js/vendor/gsap.min.js?v=4"></script>
-<script src="assets/js/vendor/ScrollTrigger.min.js?v=4"></script>
-<script src="assets/js/vendor/lenis.min.js?v=4"></script>
-<script src="assets/js/app-data.js?v=4"></script>
-<script src="assets/js/app-engine.js?v=4"></script>
-<script src="assets/js/motion.js?v=4"></script>
+<script src="assets/js/vendor/three.min.js?v=3"></script>
+<script src="assets/js/vendor/gsap.min.js?v=3"></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js?v=3"></script>
+<script src="assets/js/vendor/lenis.min.js?v=3"></script>
+<script src="assets/js/app-data.js?v=3"></script>
+<script src="assets/js/app-engine.js?v=3"></script>
+<script src="assets/js/motion.js?v=3"></script>
 </body>
 </html>
